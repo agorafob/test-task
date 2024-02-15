@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class TestCase {
     private static final List<Integer> data = new ArrayList<>();
@@ -31,15 +32,20 @@ public class TestCase {
                 ifPresent(System.out::println);
     }
 
+    public void getAverage() {
+        AtomicInteger sum = new AtomicInteger();
+        data.parallelStream().forEach(sum::addAndGet);
+        System.out.println(sum.get() / data.size());
+    }
+
     public void getMedian() {
-        long size = data.parallelStream().count();
+        long size = data.size();
         if (size % 2 != 0) {
             System.out.println(data.get((int) (size / 2) + 1));
         } else {
             System.out.println((data.get((int) (size / 2) + data.get((int) (size / 2) + 1))) / 2);
         }
     }
-
 
     public void maxIncrease() {
         List<List<Integer>> sequences = new ArrayList<>();

@@ -5,6 +5,7 @@ public class Main {
         TestCase t = new TestCase("D:\\10m.txt");
         t.getMax();
         t.getMin();
+        t.getAverage();
         t.getMedian();
         t.maxIncrease();
         t.maxDecrease();
